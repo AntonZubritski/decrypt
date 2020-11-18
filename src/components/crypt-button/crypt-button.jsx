@@ -5,33 +5,21 @@ const CryptButton = ({ ...props }) => {
   const { checkbox, valueTextarea, setDecryptText } = props
 
   const edwardDecrypt = () => {
-    let text = ''
-    for (let i = 0; i < valueTextarea.length; i++) {
-      if (valueTextarea[i] !== valueTextarea[i + 1]) {
-        text += valueTextarea[i]
-      } else if (valueTextarea[i] + valueTextarea[i + 1] === 'qq') {
-        text += ' '
-        i++
-      } else {
-        i++
-      }
-    }
-    setDecryptText(text)
+    setDecryptText(valueTextarea.replaceAll(/([a-z])\1/g, ''))
   }
+
+
   const edwardEncrypt = () => {
-    const replaceTextarea = valueTextarea.replace(/[^a-z /s]/g, '')
-    const characters = 'abcdefghijklmnoprstuvwxyz'
+    const replaceTextarea = valueTextarea.replaceAll(/[,.!?:;'"/ —-]/g, '')
     let text = ''
 
     for (let i = 0; i < replaceTextarea.length; i++) {
-      let randomLet = characters
-        .charAt(Math.floor(Math.random() * characters.length))
-        .repeat(2)
+      let randomLet = String.fromCharCode(
+        Math.floor(97 + Math.random() * (122 + 1 - 97))
+      ).repeat(2)
 
       if (replaceTextarea[i] === replaceTextarea[i + 1]) {
         text += replaceTextarea[i] + randomLet
-      } else if (replaceTextarea[i] === ' ') {
-        text += 'qq'
       } else {
         text += replaceTextarea[i] + (Math.random() <= 0.65 ? randomLet : '')
       }
