@@ -9,7 +9,11 @@ const DecryptButtonGroup = ({ ...props }) => {
 
   return (
     <div className="decrypt-button">
-      <CheckBox setCheckbox={setCheckbox} setValueTextarea={setValueTextarea} />
+      <CheckBox
+        setCheckbox={setCheckbox}
+        setValueTextarea={setValueTextarea}
+        setDecryptText={setDecryptText}
+      />
       <CryptButton
         checkbox={checkbox}
         valueTextarea={valueTextarea}
